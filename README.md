@@ -4,7 +4,7 @@ Optimization of an algorithm in the subject of Design and Analysis of Algorithms
 ----------------------
 ## Application
 
-#### 1️ - Algorithmn [`(main.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/edit/main/main.c) -  Teacher Alexei Machado
+#### 1️ - Algorithmn [`(main.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/main/main.c) -  Teacher Alexei Machado
 This code is a C program that calculates a 2D matrix of float values, given a binary data file, number of rows and number of columns as inputs. The code calculates the matrix by performing various mathematical operations on the elements of the input data file.
 
 #### 📋 Functionalities
@@ -37,7 +37,7 @@ The code contains four functions:
 - The code defines the constant `PI` with the value of 3.141592.
 - The code saves the output matrix to a text file named "real_values.txt".
 
-#### 2️ - Algorithm [`(generateFile.cpp)`](https://github.com/brunofaria27/optimization-of-an-algorithm/edit/main/generateFile.cpp)
+#### 2️ - Algorithm [`(generateFile.cpp)`](https://github.com/brunofaria27/optimization-of-an-algorithm/main/generateFile.cpp)
 This algorithm is auxiliary and generates a file with `n x m` random values between `0` and `255`. Just pass the number of values `n = lines` and `m = columns` as a parameter in the terminal during the compilation time.
 
 -------------------
