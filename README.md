@@ -55,3 +55,9 @@ $ ./generate.exe <number of rows> <number of columns>
 $ gcc main.c -o main.exe
 $ ./generate.exe randomValues.txt <number of rows> <number of columns>
 ````
+
+-------------------
+
+## ✅ Documentation
+
+- [Overleaf - LaTeX](https://www.overleaf.com/9187317886mpsccnsjrvyt)
