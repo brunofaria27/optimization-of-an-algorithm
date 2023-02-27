@@ -7,20 +7,23 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    int rows, cols;
+    if (argc < 3) {
+        cout << "Error: Please provide number of rows and columns" << endl;
+        return 1;
+    }
 
-    rows = atoi(argv[1]);
-    cols = atoi(argv[2]);
-    
+    int rows = atoi(argv[1]);
+    int cols = atoi(argv[2]);
+
     srand(time(NULL));
-    
-    ofstream fp("randomValues.txt");
+
+    ofstream fp("random-20000-8000.txt");
 
     if (!fp.is_open()) {
         cout << "Error opening file" << endl;
-        exit(-1);
+        return 1;
     }
-    
+
     // Generating random values and writing to file
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
@@ -28,9 +31,9 @@ int main(int argc, char **argv)
         }
         fp << endl;
     }
-    
+
     fp.close();
-    
+
     cout << "File generated successfully!" << endl;
 
     return 0;

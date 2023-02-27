@@ -42,7 +42,7 @@ This algorithm is auxiliary and generates a file with `n x m` random values betw
 
 -------------------
 
-## ✅ Run Code
+## 🚀 Run Code
 To run the code, just have the [**MinGW**](https://sourceforge.net/projects/mingw/) compiler on your machine and use the following commands:
 
 - Generate the file to be sent to main 
@@ -55,6 +55,15 @@ $ ./generate.exe <number of rows> <number of columns>
 $ gcc main.c -o main.exe
 $ ./generate.exe randomValues.txt <number of rows> <number of columns>
 ````
+
+-------------------
+
+## 📈 Code for drawing graphics [**(graphics.py)**](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/graphics.py)
+This code using Jupyter Notebook, using the **matplotlib.pyplot** library. Which generates four different types of graphs for the test arrays, always in relation to the size of the file or matrix in relation to the execution time of the algorithm [`(main.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/main.c).
+- Bar graphs
+- Scatter chart
+- Line graph
+- Pie chart
 
 -------------------
 
