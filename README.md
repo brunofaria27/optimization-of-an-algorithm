@@ -37,8 +37,8 @@ The code contains four functions:
 - The code defines the constant `PI` with the value of 3.141592.
 - The code saves the output matrix to a text file named "real_values.txt".
 
-#### 2️ - Algorithm [`(generateFile.cpp)`](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/generateFile.cpp)
-This algorithm is auxiliary and generates a file with `n x m` random values between `0` and `255`. Just pass the number of values `n = lines` and `m = columns` as a parameter in the terminal during the compilation time.
+#### 2️ - Algorithm [`(generateFile.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/generateFile.c)
+This algorithm is auxiliary and generates a file with `n x m` random values between `0` and `255` in byte. Just pass the name of file `name_file` and number of values `n = lines` and `m = columns` as a parameter in the terminal during the compilation time.
 
 -------------------
 

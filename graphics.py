@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 
-tamanho_matriz = ["5000x1000", "10000x2000", "15000x4000", "20000x8000"]
-tamanho_arquivo = [17.4, 69.7, 209.2, 557.8] # Em MB
-tempo = [1.551, 6.952, 21.420, 66.780]
-memoria = [24.2, 95.7, 286.5, 763.3]
+tamanho_matriz = ["2500x2500", "5000x5000", "10000x10000", "15000x15000"]
+tamanho_arquivo = [6.1, 24.4, 36.6, 97.6] # Em MB
+tempo = [1.94, 8.4, 33.89, 78.486]
+memoria = [30.2, 119.6, 477.2, 1073.3]
 
-# Gráfico de linha para o tamanho da matriz e tempo de execução
 def plot_linha(x, y):
     plt.figure(figsize=(8, 6))
     plt.scatter(x, y, color='blue')
@@ -15,4 +14,4 @@ def plot_linha(x, y):
     plt.ylabel('Memória (MB)')
     plt.show()
 
-plot_linha(tamanho_arquivo, tempo)
+plot_linha(tamanho_arquivo, memoria)
