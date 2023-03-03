@@ -16,10 +16,25 @@ unsigned char ReadElement(FILE *p) {
 }
 
 /************************************************************************/
-
+/*
+* Mudança 1: pré calcular 1 vez os valores de sen e cos para todos os elementeos possiveis
+* com isso ele será cálculado apenas uma vez para cada elemente (256 vezes), diminuindo a complexidade.
+* Assim, para quando quiser o valor de cos para algum valor basta apenas consultar no vetor calculado.
+*/
 void DetSinCos(unsigned char element, float *sin_element, float *cos_element) {
-  *sin_element = sin(2.0 * PI * element / 360.0);
-  *cos_element = cos(2.0 * PI * element / 360.0);
+  static float sin_table[256], cos_table[256];
+  static int initialized = 0;
+
+  if (!initialized) {
+    for (int i = 0; i < 256; i++) {
+      sin_table[i] = sin(2.0 * PI * i / 360.0);
+      cos_table[i] = cos(2.0 * PI * i / 360.0);
+    }
+    initialized = 1;
+  }
+
+  *sin_element = sin_table[element];
+  *cos_element = cos_table[element];
 }
 
 /************************************************************************/
