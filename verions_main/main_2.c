@@ -75,14 +75,9 @@ int main(int argc, char **argv) {
     exit(-1);
   }
 
-  /*
-  * Mudança 2: foi mudado o jeito de inicializar a matriz, já que a mesma é um endereço de memória, não tem motivo para 
-  * armazenar ela em formato bidimensional, com isso a matriz está sendo representada unidimensionalmente. Evitando assim,
-  * fazer calculos para acessar o endereço de memória da posição na matriz. Além de que o `for` muda a forma de ser escrito.
-  * Para que o cálculo de acesso a posições bidimensionais não precise ser efetuado.
-  */
-  for (i = 0; i < cols * rows; i++)
-      M[i] = ReadElement(data_file); // Mudança 2
+  for (j = 0; j < rows; j++)
+    for (i = 0; i < cols; i++)
+      *(M + j * cols + i) = ReadElement(data_file);
   fclose(data_file);
 
   if (!(Q = (float *)malloc((long)rows * cols * sizeof(float)))) {
@@ -93,39 +88,28 @@ int main(int argc, char **argv) {
   for (i = 0; i < 256; i++)
     C[i] = 0.0;
 
-  for (i = 0; i < cols * rows; i++)
-    C[M[i]]++;
+  for (i = 0; i < cols; i++)
+    for (j = 0; j < rows; j++) {
+      element = *(M + j * cols + i);
+      C[element]++;
+    }
 
   for (i = 0; i < 256; i++)
     C[i] = (C[i] > 0) ? log(C[i]) : 0.0;
 
-  for (i = 0; i < cols * rows; i++) {
-    element = M[i];
-    DetOutput(element, C, &out_even, &out_odd);
-    if ((element % 2) == 0)
-      Q[i] = pow(out_even, 2);
-    else
-      Q[i] = out_odd;
-  }
+  for (i = 0; i < cols; i++)
+    for (j = 0; j < rows; j++) {
+      element = *(M + j * cols + i);
+      DetOutput(element, C, &out_even, &out_odd);
+      if ((element % 2) == 0)
+        *(Q + j * cols + i) = pow(out_even, 2);
+      else
+        *(Q + j * cols + i) = out_odd;
+    }
 
   clock_t end = clock();
 
   /**** Saída não deve ser medida ****/
-  data_file = fopen("out-15000-15000.txt", "w");
-
-  if (data_file == NULL) {
-    printf("Error to create file.\n");
-    exit(-1);
-  }
-
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
-      fprintf(data_file, "%f ", *(Q + j * cols + i));
-    }
-    fprintf(data_file, "\n");
-  }
-
-  fclose(data_file);
   free(Q);
 
   time_spent += (double)(end - begin) / CLOCKS_PER_SEC;

@@ -16,25 +16,10 @@ unsigned char ReadElement(FILE *p) {
 }
 
 /************************************************************************/
-/*
-* Mudança 1: pré calcular 1 vez os valores de sen e cos para todos os elementeos possiveis
-* com isso ele será cálculado apenas uma vez para cada elemente (256 vezes), diminuindo a complexidade.
-* Assim, para quando quiser o valor de cos para algum valor basta apenas consultar no vetor calculado.
-*/
+
 void DetSinCos(unsigned char element, float *sin_element, float *cos_element) {
-  static float sin_table[256], cos_table[256];
-  static int initialized = 0;
-
-  if (!initialized) {
-    for (int i = 0; i < 256; i++) {
-      sin_table[i] = sin(2.0 * PI * i / 360.0);
-      cos_table[i] = cos(2.0 * PI * i / 360.0);
-    }
-    initialized = 1;
-  }
-
-  *sin_element = sin_table[element];
-  *cos_element = cos_table[element];
+  *sin_element = sin(2.0 * PI * element / 360.0);
+  *cos_element = cos(2.0 * PI * element / 360.0);
 }
 
 /************************************************************************/
@@ -75,14 +60,9 @@ int main(int argc, char **argv) {
     exit(-1);
   }
 
-  /*
-  * Mudança 2: foi mudado o jeito de inicializar a matriz, já que a mesma é um endereço de memória, não tem motivo para 
-  * armazenar ela em formato bidimensional, com isso a matriz está sendo representada unidimensionalmente. Evitando assim,
-  * fazer calculos para acessar o endereço de memória da posição na matriz. Além de que o `for` muda a forma de ser escrito.
-  * Para que o cálculo de acesso a posições bidimensionais não precise ser efetuado.
-  */
-  for (i = 0; i < cols * rows; i++)
-      M[i] = ReadElement(data_file); // Mudança 2
+  for (j = 0; j < rows; j++)
+    for (i = 0; i < cols; i++)
+      *(M + j * cols + i) = ReadElement(data_file);
   fclose(data_file);
 
   if (!(Q = (float *)malloc((long)rows * cols * sizeof(float)))) {
@@ -93,20 +73,24 @@ int main(int argc, char **argv) {
   for (i = 0; i < 256; i++)
     C[i] = 0.0;
 
-  for (i = 0; i < cols * rows; i++)
-    C[M[i]]++;
+  for (i = 0; i < cols; i++)
+    for (j = 0; j < rows; j++) {
+      element = *(M + j * cols + i);
+      C[element]++;
+    }
 
   for (i = 0; i < 256; i++)
     C[i] = (C[i] > 0) ? log(C[i]) : 0.0;
 
-  for (i = 0; i < cols * rows; i++) {
-    element = M[i];
-    DetOutput(element, C, &out_even, &out_odd);
-    if ((element % 2) == 0)
-      Q[i] = pow(out_even, 2);
-    else
-      Q[i] = out_odd;
-  }
+  for (i = 0; i < cols; i++)
+    for (j = 0; j < rows; j++) {
+      element = *(M + j * cols + i);
+      DetOutput(element, C, &out_even, &out_odd);
+      if ((element % 2) == 0)
+        *(Q + j * cols + i) = pow(out_even, 2);
+      else
+        *(Q + j * cols + i) = out_odd;
+    }
 
   clock_t end = clock();
 

@@ -16,11 +16,6 @@ unsigned char ReadElement(FILE *p) {
 }
 
 /************************************************************************/
-/*
-* Mudança 1: pré calcular 1 vez os valores de sen e cos para todos os elementeos possiveis
-* com isso ele será cálculado apenas uma vez para cada elemente (256 vezes), diminuindo a complexidade.
-* Assim, para quando quiser o valor de cos para algum valor basta apenas consultar no vetor calculado.
-*/
 void DetSinCos(unsigned char element, float *sin_element, float *cos_element) {
   static float sin_table[256], cos_table[256];
   static int initialized = 0;
@@ -111,21 +106,6 @@ int main(int argc, char **argv) {
   clock_t end = clock();
 
   /**** Saída não deve ser medida ****/
-  data_file = fopen("out-15000-15000.txt", "w");
-
-  if (data_file == NULL) {
-    printf("Error to create file.\n");
-    exit(-1);
-  }
-
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
-      fprintf(data_file, "%f ", *(Q + j * cols + i));
-    }
-    fprintf(data_file, "\n");
-  }
-
-  fclose(data_file);
   free(Q);
 
   time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
