@@ -145,7 +145,7 @@ int main(int argc, char **argv)
   clock_t end = clock();
 
   /**** Saída não deve ser medida ****/
-  data_file = fopen("out", "w");
+  /* data_file = fopen("out", "w");
 
   if (data_file == NULL)
   {
@@ -162,7 +162,7 @@ int main(int argc, char **argv)
     fprintf(data_file, "\n");
   }
 
-  fclose(data_file);
+  fclose(data_file); */
   free(M);
   free(C);
   free(out_even_table);

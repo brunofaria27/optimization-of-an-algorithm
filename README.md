@@ -4,7 +4,7 @@ Optimization of an algorithm in the subject of Design and Analysis of Algorithms
 ----------------------
 ## Application
 
-#### 1️ - Algorithmn [`(main.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/main.c) -  Teacher Alexei Machado
+#### 1️ - Algorithmn [`(main.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/versions_main/main_1.c) -  Teacher Alexei Machado
 This code is a C program that calculates a 2D matrix of float values, given a binary data file, number of rows and number of columns as inputs. The code calculates the matrix by performing various mathematical operations on the elements of the input data file.
 
 #### 📋 Functionalities
@@ -59,11 +59,8 @@ $ ./generate.exe randomValues.txt <number of rows> <number of columns>
 -------------------
 
 ## 📈 Code for drawing graphics [**(graphics.py)**](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/graphics.py)
-This code using Jupyter Notebook, using the **matplotlib.pyplot** library. Which generates four different types of graphs for the test arrays, always in relation to the size of the file or matrix in relation to the execution time of the algorithm [`(main.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/main.c).
-- Bar graphs
-- Scatter chart
+This code using Jupyter Notebook, using the **matplotlib.pyplot** library. Which generates four different types of graphs for the test arrays, always in relation to the size of the file or matrix in relation to the execution time of the algorithm [`(main.c)`](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/versions_main/main_1.c).
 - Line graph
-- Pie chart
 
 -------------------
 
