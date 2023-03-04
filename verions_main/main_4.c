@@ -5,21 +5,20 @@
 #define PI 3.141592
 
 /************************************************************************/
-unsigned char ReadElement(FILE *p) {
-  unsigned char element;
-  if (1 != fread(&element, 1, 1, p)) {
-    printf("Corrupt data file.\n");
-    exit(-1);
-  }
-  else
-    return (element);
-}
-
-/************************************************************************/
-
 void DetSinCos(unsigned char element, float *sin_element, float *cos_element) {
-  *sin_element = sin(2.0 * PI * element / 360.0);
-  *cos_element = cos(2.0 * PI * element / 360.0);
+  static float sin_table[256], cos_table[256];
+  static int initialized = 0;
+
+  if (!initialized) {
+    for (int i = 0; i < 256; i++) {
+      sin_table[i] = sin(2.0 * PI * i / 360.0);
+      cos_table[i] = cos(2.0 * PI * i / 360.0);
+    }
+    initialized = 1;
+  }
+
+  *sin_element = sin_table[element];
+  *cos_element = cos_table[element];
 }
 
 /************************************************************************/
@@ -60,9 +59,11 @@ int main(int argc, char **argv) {
     exit(-1);
   }
 
-  for (j = 0; j < rows; j++)
-    for (i = 0; i < cols; i++)
-      *(M + j * cols + i) = ReadElement(data_file);
+  // Mudança 3: leitura em bloco
+  if (cols * rows != fread(M, 1, cols * rows, data_file)) {
+    printf("Error reading data file.\n");
+    exit(-1);
+  }
   fclose(data_file);
 
   if (!(Q = (float *)malloc((long)rows * cols * sizeof(float)))) {
@@ -73,43 +74,23 @@ int main(int argc, char **argv) {
   for (i = 0; i < 256; i++)
     C[i] = 0.0;
 
-  for (i = 0; i < cols; i++)
-    for (j = 0; j < rows; j++) {
-      element = *(M + j * cols + i);
-      C[element]++;
-    }
+  for (i = 0; i < cols * rows; i++)
+    C[M[i]]++;
 
   for (i = 0; i < 256; i++)
     C[i] = (C[i] > 0) ? log(C[i]) : 0.0;
 
-  for (i = 0; i < cols; i++)
-    for (j = 0; j < rows; j++) {
-      element = *(M + j * cols + i);
-      DetOutput(element, C, &out_even, &out_odd);
-      if ((element % 2) == 0)
-        *(Q + j * cols + i) = pow(out_even, 2);
-      else
-        *(Q + j * cols + i) = out_odd;
-    }
+  for (i = 0; i < cols * rows; i++) {
+    element = M[i];
+    DetOutput(element, C, &out_even, &out_odd);
+    if ((element % 2) == 0)
+      Q[i] = pow(out_even, 2);
+    else
+      Q[i] = out_odd;
+  }
 
   clock_t end = clock();
 
-  /**** Saída não deve ser medida ****/
-  data_file = fopen("out-15000-15000.txt", "w");
-
-  if (data_file == NULL) {
-    printf("Error to create file.\n");
-    exit(-1);
-  }
-
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
-      fprintf(data_file, "%f ", *(Q + j * cols + i));
-    }
-    fprintf(data_file, "\n");
-  }
-
-  fclose(data_file);
   free(Q);
   free(M);
 

@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
   int rows, cols, i, j;
   double time_spent = 0.0;
   unsigned char element, *M;
-  float out_even, out_odd, *Q, C[256], out_even_table[256], out_odd_table[256], pow_even_table[256], odd_table[256];
+  float out_even, out_odd, *Q, C[256], out_even_table[256], out_odd_table[256];
 
   clock_t begin = clock();
 
@@ -83,42 +83,18 @@ int main(int argc, char **argv) {
     C[i] = (C[i] > 0) ? log(C[i]) : 0.0;
 
   DetOutputTable(C, out_even_table, out_odd_table);
-  for (i = 0; i < 256; i++) {
-    if ((i % 2) == 0)
-      pow_even_table[i] = pow(out_even_table[i], 2);
-    else
-      odd_table[i] = out_odd_table[i];
-  }
-
   for (i = 0; i < cols * rows; i++) {
     element = M[i];
     if ((element % 2) == 0)
-      Q[i] = pow_even_table[element];
+      Q[i] = pow(out_even_table[element], 2);
     else
-      Q[i] = odd_table[element];
+      Q[i] = out_odd_table[element];
   }
 
   clock_t end = clock();
 
-  /**** Saída não deve ser medida ****/
-  /*
-  data_file = fopen("out", "w");
-
-  if (data_file == NULL) {
-    printf("Error to create file.\n");
-    exit(-1);
-  }
-
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
-      fprintf(data_file, "%f ", *(Q + j * cols + i));
-    }
-    fprintf(data_file, "\n");
-  }
-
-  fclose(data_file);
-  */
   free(Q);
+  free(M);
 
   time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
   printf("EXECUTION TIME: %f seconds", time_spent);

@@ -111,7 +111,8 @@ int main(int argc, char **argv) {
 
   /**** Saída não deve ser medida ****/
   free(Q);
-
+  free(M);
+  
   time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
   printf("EXECUTION TIME: %f seconds", time_spent);
 }

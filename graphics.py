@@ -7,10 +7,10 @@ tempo = [1.94, 8.4, 33.89, 78.486]
 memoria = [30.2, 119.6, 477.2, 1073.3]
 
 mudanca1_time = [1.223, 5.6, 22.479, 52.089]
-mudanca1_memory = [30.2, 119.6, 477.2, 1073.3]
-
 mudanca2_time = [1.11, 4.412, 17.61, 39.842]
-mudanca2_memory = [30.2, 119.6, 477.2, 1073.3]
+mudanca3_time = [0.9, 3.459, 13.63, 31.06] # Leitura diferente
+mudanca4_time = [0.24, 0.97, 3.98, 8.77]
+mudanca5_time = [0.058, 0.232, 0.907, 2.054]
 
 def plot_linha(x, y, Y):
     plt.figure(figsize=(12, 8))
