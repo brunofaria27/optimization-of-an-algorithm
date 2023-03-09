@@ -145,24 +145,6 @@ int main(int argc, char **argv)
   clock_t end = clock();
 
   /**** Saída não deve ser medida ****/
-  /* data_file = fopen("out", "w");
-
-  if (data_file == NULL)
-  {
-    printf("Error to create file.\n");
-    exit(-1);
-  }
-
-  for (i = 0; i < rows; i++)
-  {
-    for (j = 0; j < cols; j++)
-    {
-      fprintf(data_file, "%f ", *(Q + j * cols + i));
-    }
-    fprintf(data_file, "\n");
-  }
-
-  fclose(data_file); */
   free(M);
   free(C);
   free(out_even_table);

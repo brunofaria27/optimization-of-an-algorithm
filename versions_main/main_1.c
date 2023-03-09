@@ -95,21 +95,12 @@ int main(int argc, char **argv) {
   clock_t end = clock();
 
   /**** Saída não deve ser medida ****/
-  data_file = fopen("out-15000-15000.txt", "w");
-
-  if (data_file == NULL) {
-    printf("Error to create file.\n");
-    exit(-1);
-  }
-
-  for (i = 0; i < rows; i++) {
-    for (j = 0; j < cols; j++) {
-      fprintf(data_file, "%f ", *(Q + j * cols + i));
+  for(i=0; i<cols; i++) {
+    for(j=0; j<rows; j++) {
+      printf("%f ",*(Q+j*cols+i));
     }
-    fprintf(data_file, "\n");
+    printf("\n");
   }
-
-  fclose(data_file);
   free(Q);
   free(M);
 
