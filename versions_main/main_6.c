@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
   int rows, cols, i, j;
   double time_spent = 0.0;
   unsigned char element, *M;
-  float out_even, out_odd, *Q, C[256], out_even_table[256], out_odd_table[256], pow_even_table[256], odd_table[256];
+  float out_even, out_odd, *Q, C[256] = {0}, out_even_table[256], out_odd_table[256], pow_even_table[256], odd_table[256];
 
   clock_t begin = clock();
 
@@ -72,9 +72,6 @@ int main(int argc, char **argv) {
     printf("Not enough memory for output matrix.\n");
     exit(-1);
   }
-
-  for (i = 0; i < 256; i++)
-    C[i] = 0.0;
 
   for (i = 0; i < cols * rows; i++)
     C[M[i]]++;
