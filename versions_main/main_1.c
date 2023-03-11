@@ -95,12 +95,13 @@ int main(int argc, char **argv) {
   clock_t end = clock();
 
   /**** Saída não deve ser medida ****/
-  for(i=0; i<cols; i++) {
-    for(j=0; j<rows; j++) {
-      printf("%f ",*(Q+j*cols+i));
+  for(i = 0; i < cols; i++) {
+    for(j = 0; j < rows; j++) {
+      printf("%f ", *(Q+j*cols+i));
     }
     printf("\n");
   }
+  
   free(Q);
   free(M);
 
