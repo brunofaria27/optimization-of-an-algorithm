@@ -66,4 +66,4 @@ This code using Jupyter Notebook, using the **matplotlib.pyplot** library. Which
 
 ## ✅ Documentation
 
-- [PDF - LaTeX]([https://www.overleaf.com/9187317886mpsccnsjrvyt](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/Statement%20and%20Documentation/Documenta%C3%A7%C3%A3o%20-%20Trabalho%201.pdf))
+- [PDF - LaTeX - Portuguese](https://github.com/brunofaria27/optimization-of-an-algorithm/blob/main/Statement%20and%20Documentation/Documenta%C3%A7%C3%A3o%20-%20Trabalho%201.pdf)
