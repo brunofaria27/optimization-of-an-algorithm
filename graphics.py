@@ -1,5 +1,3 @@
-import matplotlib.pyplot as plt
-
 tamanho_matriz = ["2500x2500", "5000x5000", "10000x10000", "15000x15000"]
 tamanho_arquivo = [6.1, 24.4, 36.6, 97.6] # Em MB
 
@@ -13,27 +11,27 @@ memoria = [30.2, 119.6, 477.2, 1073.3]
 mudanca5_time = [0.058, 0.232, 0.907, 2.054]
 memoria5 = [33.2, 127, 515.2, 1176.3]
 
-def plot_linha(x, y, y2, z, z2):
-    fig, axs = plt.subplots(1, 2, figsize=(20, 14))
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
 
-    axs[0].scatter(x, y, color='blue')
-    axs[0].plot(x, y, color='red', label="Versão original")
-    axs[0].scatter(x, y2, color='blue')
-    axs[0].plot(x, y2, color='green', label="Última versão")
-    axs[0].set_title('Tempo de execução em relação ao tamanho do arquivo')
-    axs[0].set_xlabel('Tamanho do arquivo (MB)')
-    axs[0].set_ylabel('Tempo (s)')
-    axs[0].legend()
+# Gerando dados aleatórios
+X = np.array([]).reshape((-1, 1))
+y = np.array([])
 
-    axs[1].scatter(x, z, color='blue')
-    axs[1].plot(x, z, color='red', label="Versão original")
-    axs[1].scatter(x, z2, color='blue')
-    axs[1].plot(x, z2, color='green', label="Última versão")
-    axs[1].set_title('Uso de memória em relação ao tamanho do arquivo')
-    axs[1].set_xlabel('Tamanho do arquivo (MB)')
-    axs[1].set_ylabel('Memória (MB)')
-    axs[1].legend()
+# Criando objeto de regressão linear
+model = LinearRegression()
 
-    plt.show()
+# Treinando o modelo com os dados
+model.fit(X, y)
 
-plot_linha(tamanho_arquivo, tempo, mudanca5_time, memoria, memoria5)
+# Fazendo previsões com o modelo treinado
+y_pred = model.predict(X)
+
+# Plotando o gráfico com os dados e a linha de regressão
+plt.scatter(X, y)
+plt.plot(X, y_pred, color='red', label="Regressão linear")
+plt.xlabel('Tamanho do arquivo (MB)')
+plt.ylabel('Tempo (s)')
+plt.legend()
+plt.show()

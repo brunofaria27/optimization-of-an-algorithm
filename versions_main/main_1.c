@@ -95,16 +95,9 @@ int main(int argc, char **argv) {
   clock_t end = clock();
 
   /**** Saída não deve ser medida ****/
-  for(i = 0; i < cols; i++) {
-    for(j = 0; j < rows; j++) {
-      printf("%f ", *(Q+j*cols+i));
-    }
-    printf("\n");
-  }
-  
   free(Q);
   free(M);
 
   time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
-  printf("EXECUTION TIME: %f seconds", time_spent);
+  printf("%f", time_spent);
 }

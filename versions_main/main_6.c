@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
   }
 
   if (cols * rows != fread(M, 1, cols * rows, data_file)) {
-    printf("Error reading data file.\n");
+    printf("Error reading data file %s .\n", argv[1]);
     exit(-1);
   }
   fclose(data_file);
@@ -96,10 +96,10 @@ int main(int argc, char **argv) {
   }
 
   clock_t end = clock();
-
+  
   free(Q);
   free(M);
 
   time_spent += (double)(end - begin) / CLOCKS_PER_SEC;
-  printf("EXECUTION TIME: %f seconds", time_spent);
+  printf("%f", time_spent);
 }
